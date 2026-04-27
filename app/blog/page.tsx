@@ -23,10 +23,7 @@ export default async function BlogPage() {
         {blogPosts.length > 0 ? (
           <div className="flex flex-col space-y-4">
             {blogPosts.map((post) => (
-              <Card
-                key={post.id}
-                className="hover:bg-accent transitions-colors"
-              >
+              <Card key={post.id} className="hover:bg-accent transition-colors">
                 <Link href={`/blog/${post.slug}`}>
                   <CardContent className="p-4">
                     <h3 className="font-semibold">{post.title}</h3>

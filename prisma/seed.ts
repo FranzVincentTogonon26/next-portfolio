@@ -75,15 +75,18 @@ async function main() {
   ];
 
   for (const post of blogPosts) {
-    await db.blogPost.create({
-      data: post,
+    await db.blogPost.upsert({
+      where: { slug: post.slug },
+      update: { title: post.title, content: post.content },
+      create: post,
     });
   }
 }
 
 main()
-  .catch((e) => {
+  .catch(async (e) => {
     console.error(e);
+    await db.$disconnect();
     process.exit(1);
   })
   .finally(async () => {
